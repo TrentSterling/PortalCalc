@@ -1,0 +1,33 @@
+PortalCalc -- by Patrick Anker
+Copyright (C) 2011 Patrick Anker
+
+Version number: 1.0.0
+Bukkit version: 953 (MC 1.7.2)
+
+Thank you for trying PortalCalc, a little plugin that aids in calculating and constructing dedicated portals for Minecraft. What's in it? Currently (1.0.0), it tracks positions and calculates the identical position in the other world, overworld and nether. In the future, I hope to include area checking for other portals (which would be an IDEAL feature for something like this). As per the GNU General Public License, you MAY modify ANY code in the plugin. If you like something that you have built for this plugin, email it to me (patricksanker@gmail.com). I test it out and put it up for public download (of course, I will commend your splendid work :D ).
+
+USAGE
+-----
+The plugin accepts the base command form "/pcalc" and its alias "/pc". Here are the arguments that the plugin accepts:
+
+/pcalc -n: If in Overworld, this will calculate your position in respect to the Nether. (NB: If you pass this argument to the plugin in the Nether, it will return your current position).
+
+/pcalc -o: If in Nether, this will calculate your position in respect to the Overworld. (NB: If you pass this argument to the plugin in the Overworld, it will return your current position).
+
+/pcalc [-h, help]: This will display help for the plugin, in case you forget the format. :D
+
+
+Small License (please read LICENSE, too, if you aren't already familiar with the GPL)
+----------
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see http://www.gnu.org/licenses/.
