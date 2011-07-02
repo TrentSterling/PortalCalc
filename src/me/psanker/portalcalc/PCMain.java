@@ -1,15 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package me.psanker.portalcalc;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-/**
- *
- * @author patrick
- */
 public class PCMain extends JavaPlugin {
     
     private static final PCLog log = new PCLog();

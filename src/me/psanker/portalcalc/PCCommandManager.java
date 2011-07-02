@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package me.psanker.portalcalc;
 
 import org.bukkit.World.Environment;
@@ -14,10 +10,6 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.ChatColor;
 
-/**
- *
- * @author patrick
- */
 public class PCCommandManager implements CommandExecutor {
 
     private static PCMain plugin;
@@ -39,6 +31,7 @@ public class PCCommandManager implements CommandExecutor {
         }
     }
     
+    // Created for future features (not completely extraneous)
     private void calculate(CommandSender cs, Command cmnd, String label, String[] args) {
         Player player = (Player) cs;
         
