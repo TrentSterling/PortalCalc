@@ -4,7 +4,12 @@ Copyright (C) 2011 Patrick Anker
 Version number: 1.0.0
 Bukkit version: 953 (MC 1.7.2)
 
-Thank you for trying PortalCalc, a little plugin that aids in calculating and constructing dedicated portals for Minecraft. What's in it? Currently (1.0.0), it tracks positions and calculates the identical position in the other world, overworld and nether. In the future, I hope to include area checking for other portals (which would be an IDEAL feature for something like this). As per the GNU General Public License, you MAY modify ANY code in the plugin. If you like something that you have built for this plugin, email it to me (patricksanker@gmail.com). I test it out and put it up for public download (of course, I will commend your splendid work :D ).
+Thank you for trying PortalCalc, a little plugin that aids in calculating and constructing dedicated portals for Minecraft. 
+What's in it? Currently (1.0.0), it tracks positions and calculates the identical position in the other world, overworld and nether. 
+In the future, I hope to include area checking for other portals (which would be an IDEAL feature for something like this). 
+As per the GNU General Public License, you MAY modify ANY code in the plugin. 
+If you like something that you have built for this plugin, email it to me (patricksanker@gmail.com). 
+I will test it out and put it up for public download (of course, I will commend your splendid work :D ).
 
 USAGE
 -----
