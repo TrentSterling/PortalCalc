@@ -87,9 +87,41 @@ public class PCCommandManager implements CommandExecutor {
         } 
 
         else if (("pcalc".equals(label) && args.length == 0) || ("pc".equals(label) && args.length == 0)){
-            player.sendMessage(ChatColor.AQUA+"/pcalc -n : If in Overworld, calculate Nether position");
-            player.sendMessage(ChatColor.AQUA+"/pcalc -o : If in Nether, calculate Overworld position");
-            player.sendMessage(ChatColor.AQUA+"/pcalc [-h, help] : Display PortalCalc help");
+            World world;
+            world = player.getWorld();
+            Environment env = world.getEnvironment();
+            
+            if (env == Environment.NETHER) {
+                Location loc = player.getLocation();
+                double x = loc.getX();
+                double y = loc.getY();
+                double z = loc.getZ();
+
+                x = Math.floor(x * 8);
+                y = Math.floor(y);
+                z = Math.floor(z * 8);
+
+                player.sendMessage(ChatColor.AQUA+"Overworld position (X,Y,Z) is (" + x + ", " + y + ", " + z + ")");
+            }
+            
+            else if (env == Environment.NORMAL) {
+                Location loc = player.getLocation();
+                double x = loc.getX();
+                double y = loc.getY();
+                double z = loc.getZ();
+
+                x = Math.floor(x / 8);
+                y = Math.floor(y);
+                z = Math.floor(z / 8);
+
+                player.sendMessage(ChatColor.AQUA+"Nether position (X,Y,Z) is (" + x + ", " + y + ", " + z + ")");
+            }
+            
+            else {
+                player.sendMessage(ChatColor.AQUA+"/pcalc -n : If in Overworld, calculate Nether position");
+                player.sendMessage(ChatColor.AQUA+"/pcalc -o : If in Nether, calculate Overworld position");
+                player.sendMessage(ChatColor.AQUA+"/pcalc [-h, help] : Display PortalCalc help");
+            }
         }
     }   
 }

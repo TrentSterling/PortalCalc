@@ -1,0 +1,3 @@
+v1.0.1
+- Changed "/pcalc" and "/pc" to return player's other world's location,
+  rather than show help
