@@ -6,8 +6,8 @@ commands:
   pcalc:
     description: Calculate coords (nether or overworld)
     usage: |
-      /<command> [-n, -o, -h, help]
+      /<command> [-n, -o, -s, -h, help]
   pc:
     description: Alias for /pcalc
     usage: |
-      /<command> [-n, -o, -h, help]
+      /<command> [-n, -o, -s, -h, help]
