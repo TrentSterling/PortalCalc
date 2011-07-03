@@ -170,7 +170,7 @@ public class PCCommandManager implements CommandExecutor {
         boolean scanned = scan.scan(player);
         if (scanned == true) {
             String name = player.getDisplayName();
-            log.log(name + " scanned region of [" + world_name + "] (" + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + ") for active portal", 0);
+            // log.log(name + " scanned region of [" + world_name + "] (" + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + ") for active portal", 0);
         } else {
             log.log("scan() called for no reason", 2);
         }
@@ -184,7 +184,7 @@ public class PCCommandManager implements CommandExecutor {
         boolean scanned = scan.scanWithHeight(height, player);
         if (scanned == true) {
             String name = player.getDisplayName();
-            log.log(name + " scanned region of [" + world_name + "] (" + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + ") for active portal", 0);
+            // log.log(name + " scanned region of [" + world_name + "] (" + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + ") for active portal", 0);
         } else {
             log.log("scan() called for no reason", 2);
         }

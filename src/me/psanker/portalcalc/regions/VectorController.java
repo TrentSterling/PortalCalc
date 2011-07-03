@@ -1,15 +1,14 @@
 package me.psanker.portalcalc.regions;
 
-import java.awt.geom.Line2D;
 import me.psanker.portalcalc.PCLog;
 
 import org.bukkit.Location;
 
 
-// -X is east
-// +X is west
-// -Z is north
-// +Z is south
+// -X is north
+// +X is south
+// -Z is east
+// +Z is west
 
 public class VectorController {
     
@@ -35,45 +34,54 @@ public class VectorController {
         double z1 = loc1.getZ();
         double z2 = loc2.getZ();
         
-        // Assume player is standing on (x, 0) coord of hypotenuse
-        // Therefore, set distance (hypotenuse) and adjacent side to vectors used
+        double hyp = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((z2 - z1), 2));
+        double opp = Math.sqrt(Math.pow((x2 - x2), 2) + Math.pow((z2 - z1), 2));
         
-        Line2D line1 = new Line2D.Double(x1, z1, x2, z1);
-        Line2D line2 = new Line2D.Double(x1, z1, x2, z2);
-        
-        double angle1 = Math.atan2(line1.getY1() - line1.getY2(),
-                                   line1.getX1() - line1.getX2());
-        double angle2 = Math.atan2(line2.getY1() - line2.getY2(),
-                                   line2.getX1() - line2.getX2());
-        double angled = angle1 - angle2;
-        int angle = (int) Math.floor(Math.toDegrees(angled));
+        double sinangle = opp / hyp;
+        double angle = Math.asin(sinangle);
+        angle = Math.toDegrees(angle);
         
         if (angle < 0) {
-            angle += 360;
+            angle += 360.0D;
         }
         
-        // ----------
+        // Construct quadrants
         
-        if ((angle == 0) || ((angle > 0) && (angle < 30))) {
-            direction = "north";
-        }
-                
-        else if ((angle > 30) && (angle < 60)) {
-            direction = "northw";
-        }        
-        
-        else if ((angle == 90) || ((angle > 60) && (angle < 120))) {
-            direction = "west";
+        if ((x1 > x2) && (z1 > z2)) {
+            double comp = 90 - angle;
+            angle = comp;
         }
         
-        else if ((angle == 180) || ((angle > 150) && (angle < 210))) {
-            direction = "south";
+        if ((x1 > x2) && (z1 < z2))
+            angle += 90;
+        
+        if ((x1 < x2) && (z1 < z2)) {
+            double comp = 270 - angle;
+            angle = comp;
         }
         
-        else if ((angle == 270) || ((angle > 240) && (angle < 300))) {
+        if ((x1 < x2) && (z1 > z2))
+            angle += 270;
+        
+        if ((0.0D <= angle) && (angle < 22.5D))
             direction = "east";
-        }
+        if ((22.5D <= angle) && (angle < 67.5D))
+            direction = "northeast";
+        if ((67.5D <= angle) && (angle < 112.5D))
+            direction = "north";
+        if ((112.5D <= angle) && (angle < 157.5D))
+            direction = "northwest";
+        if ((157.5D <= angle) && (angle < 202.5D))
+            direction = "west";
+        if ((202.5D <= angle) && (angle < 247.5D))
+            direction = "southwest";
+        if ((247.5D <= angle) && (angle < 292.5D))
+            direction = "south";
+        if ((292.5D <= angle) && (angle < 337.5D))
+            direction = "southeast";
+        if ((337.5D <= angle) && (angle < 360.0D))
+            direction = "east";
         
-        return direction; // INACTIVE... will get back to this...
+        return direction;
     }
 }

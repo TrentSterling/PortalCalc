@@ -8,7 +8,7 @@ public class PCMain extends JavaPlugin {
     
     @Override
     public void onEnable() {
-        log.log("PortalCalc init", 0);
+        log.log("PortalCalc started.", 0);
         getCommand("pcalc").setExecutor(new PCCommandManager(this));
         getCommand("pc").setExecutor(new PCCommandManager(this));
     }
@@ -16,7 +16,6 @@ public class PCMain extends JavaPlugin {
     @Override
     public void onDisable() {
         this.getServer().getScheduler().cancelTasks(this);
-        log.log("PortalCalc terminated, no errors.", 0);
     }
             
 }

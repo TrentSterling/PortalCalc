@@ -129,9 +129,10 @@ public class ScanController {
                     else if (id == 90) {
                         Location pLoc = block.getLocation();
                         double distance = vector.calculateDistance(loc, pLoc);
+                        int d = (int) distance;
                         String direction = vector.getDirection(loc, pLoc);
                         player.sendMessage(ChatColor.GOLD + "Found active portal in range. (" + x + ", " + y + ", " + z + ")");
-                        player.sendMessage(ChatColor.AQUA + "Portal location: " + distance + " blocks away");
+                        player.sendMessage(ChatColor.AQUA + "Portal location: " + d + " blocks " + direction);
                         count++;
                         return true;
                     }
@@ -174,9 +175,10 @@ public class ScanController {
                     else if (id == 90) {
                         Location pLoc = block.getLocation();
                         double distance = vector.calculateDistance(loc, pLoc);
+                        int d = (int) distance;
                         String direction = vector.getDirection(loc, pLoc);
                         player.sendMessage(ChatColor.GOLD + "Found active portal in range. (" + x + ", " + y + ", " + z + ")");
-                        player.sendMessage(ChatColor.AQUA + "Portal location: " + distance + " blocks away");
+                        player.sendMessage(ChatColor.AQUA + "Portal location: " + d + " blocks " + direction);
                         count++;
                         return true;
                     }
