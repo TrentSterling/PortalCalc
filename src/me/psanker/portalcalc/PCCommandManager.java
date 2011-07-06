@@ -1,6 +1,7 @@
 package me.psanker.portalcalc;
 
-import me.psanker.portalcalc.regions.ScanController;
+import me.psanker.portalcalc.regions.ChunkScanner;
+import me.psanker.portalcalc.regions.RegionProvider;
 
 import org.bukkit.World.Environment;
 import org.bukkit.command.Command;
@@ -14,9 +15,11 @@ import org.bukkit.ChatColor;
 
 public class PCCommandManager implements CommandExecutor {
 
-    private static PCMain plugin;
+    @SuppressWarnings("unused")
+	private static PCMain plugin;
     private static final PCLog log = new PCLog();
-    private ScanController scan = new ScanController();
+    private static PCMessage message = new PCMessage();
+//    private ScanController scan = new ScanController();
     
     PCCommandManager(PCMain instance) {
         plugin = instance;
@@ -29,34 +32,18 @@ public class PCCommandManager implements CommandExecutor {
             log.log("Player entity expected", 0);
             return false;
         } else {
-            if (("pcalc".equals(label)) && (args.length == 1) && ("-s".equals(args[0])) || ("pc".equals(label)) && (args.length == 1) && ("-s".equals(args[0]))) {
+            if (("pcalc".equals(label)) && (args.length == 1) && ("-s".equals(args[0])) 
+                    || ("pc".equals(label)) && (args.length == 1) && ("-s".equals(args[0]))
+                    || ("pcalc".equals(label)) && (args.length == 1) && ("scan".equals(args[0]))
+                    || ("pc".equals(label)) && (args.length == 1) && ("scan".equals(args[0]))) {
                 this.scan(cs);
                 return true;
             }
-                    
-            else if (("pcalc".equals(label)) 
-                    && (args.length == 2) && ("-s".equals(args[0])) 
-                    || ("pc".equals(label)) && (args.length == 2) 
-                    && ("-s".equals(args[0]))) {
-                
-                String height_string = args[1];
-                double height_double = Double.parseDouble(height_string);
-                int height = (int) height_double;
-                
-                if (height > 30) {
-                    cs.sendMessage(ChatColor.RED+"Invalid scan height. Please choose less than or equal to 30.");
-                    return true;
-                }
-                
-                else if (height < 1) {
-                    cs.sendMessage(ChatColor.RED+"Invalid scan height. Please choose a height of at least 1 block.");
-                    return true;
-                }
-                
-                else {
-                    this.scanWithHeight(height, cs);
-                    return true;
-                }
+            
+            else if ((("pcalc".equals(label)) && (args.length == 0)) || (("pc".equals(label)) && args.length == 0)) {
+            	Player player = (Player) cs;
+            	message.sendHelp(player);
+            	return true;
             }
             
             else {
@@ -111,82 +98,28 @@ public class PCCommandManager implements CommandExecutor {
             }
 
             else if (("help".equals(args[0])) || ("-h".equals(args[0]))) {
-                player.sendMessage(ChatColor.AQUA+"/pcalc -n : If in Overworld, calculate Nether position");
-                player.sendMessage(ChatColor.AQUA+"/pcalc -o : If in Nether, calculate Overworld position");
-                player.sendMessage(ChatColor.AQUA+"/pcalc -s : Scan region for active portals");
-                player.sendMessage(ChatColor.AQUA+"/pcalc [-h, help] : Display PortalCalc help");
+                message.sendHelp(player);
             }        
 
             else {
-                player.sendMessage(ChatColor.AQUA+"Incorrect format. Use /pcalc [-n, -o, -s, -h, help]");
+                message.message(player, "Incorrect format.", 1);
+                message.sendHelp(player);
             }
-        } 
-
-        else if (("pcalc".equals(label) && args.length == 0) || ("pc".equals(label) && args.length == 0)){
-            World world;
-            world = player.getWorld();
-            Environment env = world.getEnvironment();
-            
-            if (env == Environment.NETHER) {
-                Location loc = player.getLocation();
-                double x = loc.getX();
-                double y = loc.getY();
-                double z = loc.getZ();
-
-                x = Math.floor(x * 8);
-                y = Math.floor(y);
-                z = Math.floor(z * 8);
-
-                player.sendMessage(ChatColor.AQUA+"Overworld position (X,Y,Z) is (" + x + ", " + y + ", " + z + ")");
-            }
-            
-            else if (env == Environment.NORMAL) {
-                Location loc = player.getLocation();
-                double x = loc.getX();
-                double y = loc.getY();
-                double z = loc.getZ();
-
-                x = Math.floor(x / 8);
-                y = Math.floor(y);
-                z = Math.floor(z / 8);
-
-                player.sendMessage(ChatColor.AQUA+"Nether position (X,Y,Z) is (" + x + ", " + y + ", " + z + ")");
-            }
-            
-            else {
-                player.sendMessage(ChatColor.AQUA+"/pcalc -n : If in Overworld, calculate Nether position");
-                player.sendMessage(ChatColor.AQUA+"/pcalc -o : If in Nether, calculate Overworld position");
-                player.sendMessage(ChatColor.AQUA+"/pcalc -s : Scan region for active portals");
-                player.sendMessage(ChatColor.AQUA+"/pcalc [-h, help] : Display PortalCalc help");
-            }
-        }
-    }
-
-    private void scan(CommandSender cs) {
-        Player player = (Player) cs;
-        World world = player.getWorld();
-        Location loc = player.getLocation();
-        String world_name = world.getName();
-        boolean scanned = scan.scan(player);
-        if (scanned == true) {
-            String name = player.getDisplayName();
-            // log.log(name + " scanned region of [" + world_name + "] (" + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + ") for active portal", 0);
-        } else {
-            log.log("scan() called for no reason", 2);
         }
     }
     
-    private void scanWithHeight(int height, CommandSender cs) {
+    private void scan(CommandSender cs) {
         Player player = (Player) cs;
-        World world = player.getWorld();
-        Location loc = player.getLocation();
-        String world_name = world.getName();
-        boolean scanned = scan.scanWithHeight(height, player);
-        if (scanned == true) {
-            String name = player.getDisplayName();
-            // log.log(name + " scanned region of [" + world_name + "] (" + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + ") for active portal", 0);
+    //    boolean scanned = scan.scan(player); <-- this method always returns true, so what's the point of testing the return value?!
+        RegionProvider p = new RegionProvider(player);
+        ChunkScanner s = new ChunkScanner(player, p);
+        Thread scanThread = new Thread(s);
+        scanThread.start();
+        
+       /* if (scanned == true) {
+            // Cool.
         } else {
             log.log("scan() called for no reason", 2);
-        }
+        }*/
     }
 }

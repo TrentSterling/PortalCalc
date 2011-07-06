@@ -1,7 +1,5 @@
 package me.psanker.portalcalc.regions;
 
-import me.psanker.portalcalc.PCLog;
-
 import org.bukkit.Location;
 
 
@@ -10,11 +8,9 @@ import org.bukkit.Location;
 // -Z is east
 // +Z is west
 
-public class VectorController {
+public class VectorHelper {
     
-    private static PCLog log = new PCLog();
-    
-    public double calculateDistance(Location loc1, Location loc2) {
+    public int calculateDistance(Location loc1, Location loc2) {
         double distance;
         double x1 = loc1.getX();
         double x2 = loc2.getX();
@@ -23,14 +19,13 @@ public class VectorController {
         
         distance = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((z2 - z1), 2));
         
-        return Math.floor(distance);
+        return (int) Math.floor(distance);
     }
     
     public java.lang.String getDirection(Location loc1, Location loc2) {
         String direction = null;
         double x1 = loc1.getX();
         double x2 = loc2.getX();
-        double y1 = loc1.getY();
         double z1 = loc1.getZ();
         double z2 = loc2.getZ();
         
