@@ -5,12 +5,11 @@ import org.bukkit.ChatColor;
 
 public class PCMessage {
     
-    private static PCLog log = new PCLog();
     
-    public void message(Player player, String message, int importance) {
+    public static void message(Player player, String message, int importance) {
         if ((importance > 2) || (importance < 0)) {
             player.sendMessage(ChatColor.BLUE+"[PORTALCALC] "+ChatColor.AQUA+"Something broke... Logging accident to console.");
-            log.log("me.psanker.portalcalc.PCMessage.message passed incorrect importance. Report this.", 2);
+            PCLog.log("me.psanker.portalcalc.PCMessage.message passed incorrect importance. Report this.", 2);
         }
         
         if (importance == 0)
@@ -21,7 +20,7 @@ public class PCMessage {
             player.sendMessage(ChatColor.BLUE+"[PORTALCALC] "+ChatColor.RED+message);
     }
     
-    public void sendHelp(Player player) {
+    public static void sendHelp(Player player) {
         player.sendMessage(ChatColor.AQUA+"/pcalc -n : If in Overworld, calculate Nether position");
         player.sendMessage(ChatColor.AQUA+"/pcalc -o : If in Nether, calculate Overworld position");
         player.sendMessage(ChatColor.AQUA+"/pcalc [-s, scan] : Scan region for active portals");

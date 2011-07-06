@@ -16,7 +16,6 @@ public class ChunkScanner implements Runnable {
    // private volatile Thread scanThread;
     
     //private static PCLog log = new PCLog();
-    private static PCMessage message = new PCMessage();
     private static VectorHelper vh = new VectorHelper();
     
     public void run() {
@@ -31,12 +30,12 @@ public class ChunkScanner implements Runnable {
     					Block b = world.getBlockAt(x, y, z);
     					int id = b.getTypeId();
     					if (id == 90) {
-                            message.message(player, "Active portal found", 2);
+                            PCMessage.message(player, "Active portal found", 2);
                             Location loc1 = player.getLocation();
                             Location loc2 = b.getLocation();
                             int dis = vh.calculateDistance(loc1, loc2);
                             String dir = vh.getDirection(loc1, loc2);
-                            message.message(player, "Portal is "+dis+" blocks "+dir, 1);
+                            PCMessage.message(player, "Portal is "+dis+" blocks "+dir, 1);
                             return;
                         }
     				}
@@ -49,7 +48,7 @@ public class ChunkScanner implements Runnable {
 			}
     	}
     	
-    	message.message(player, "No active portal found!", 2);
+    	PCMessage.message(player, "No active portal found!", 2);
         
     }
 

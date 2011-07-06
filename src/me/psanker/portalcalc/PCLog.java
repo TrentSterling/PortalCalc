@@ -7,7 +7,7 @@ public class PCLog {
     
     private static final Logger logger = Logger.getLogger("Minecraft");
     
-    public void log(String string, int level) {
+    public static void log(String string, int level) {
         if (level == 0) {
             logger.log(Level.INFO, "[PortalCalc] " + string, "[PortalCalc]");
         }

@@ -17,9 +17,6 @@ public class PCCommandManager implements CommandExecutor {
 
     @SuppressWarnings("unused")
 	private static PCMain plugin;
-    private static final PCLog log = new PCLog();
-    private static PCMessage message = new PCMessage();
-//    private ScanController scan = new ScanController();
     
     PCCommandManager(PCMain instance) {
         plugin = instance;
@@ -29,7 +26,7 @@ public class PCCommandManager implements CommandExecutor {
     public boolean onCommand(CommandSender cs, Command cmnd, String label, String[] args) {
         
         if (cs instanceof ConsoleCommandSender) {
-            log.log("Player entity expected", 0);
+            PCLog.log("Player entity expected", 0);
             return false;
         } else {
             if (("pcalc".equals(label)) && (args.length == 1) && ("-s".equals(args[0])) 
@@ -42,7 +39,7 @@ public class PCCommandManager implements CommandExecutor {
             
             else if ((("pcalc".equals(label)) && (args.length == 0)) || (("pc".equals(label)) && args.length == 0)) {
             	Player player = (Player) cs;
-            	message.sendHelp(player);
+            	PCMessage.sendHelp(player);
             	return true;
             }
             
@@ -98,12 +95,12 @@ public class PCCommandManager implements CommandExecutor {
             }
 
             else if (("help".equals(args[0])) || ("-h".equals(args[0]))) {
-                message.sendHelp(player);
+                PCMessage.sendHelp(player);
             }        
 
             else {
-                message.message(player, "Incorrect format.", 1);
-                message.sendHelp(player);
+                PCMessage.message(player, "Incorrect format.", 1);
+                PCMessage.sendHelp(player);
             }
         }
     }
