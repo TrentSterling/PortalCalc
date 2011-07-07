@@ -1,49 +1,7 @@
-PortalCalc -- by Patrick Anker & Joseph Griego
-Copyright (C) 2011 Patrick Anker, Joseph Griego
+PORTALCALC DEVELOPMENT
+----------------------
 
-Version number: 1.2.0
-Bukkit version: 953 (MC 1.7.2)
-
-Thank you for trying PortalCalc, a little plugin that aids in calculating and constructing dedicated portals for Minecraft. 
-What's in it? Currently (1.2.0), it tracks positions and calculates the identical position in the other world, overworld and nether.
-It also can scan a region to see if an active portal exists. After the plugin scans the region AND finds a portal,
-it will tell you where the portal is and directions to get to it. 
-As per the GNU General Public License, you MAY modify ANY code in the plugin. 
-If you like something that you have built for this plugin, email it to me (patricksanker@gmail.com). 
-I will test it out and put it up for public download (of course, I will commend your splendid work :D ).
-
-Version: 1.2.0
------
-This version is a BUNCH of code cleanup, and a new scanning system courtesy of Joe (who will be an addition to the developer team).
-Portal registration is coming!
-
-USAGE
------
-The plugin accepts the base command form "/pcalc" and its alias "/pc". Here are the arguments that the plugin accepts:
-
-/pcalc -n: If in Overworld, this will calculate your position in respect to the Nether. (NB: If you pass this argument to the plugin in the Nether, it will return your current position).
-
-/pcalc -o: If in Nether, this will calculate your position in respect to the Overworld. (NB: If you pass this argument to the plugin in the Overworld, it will return your current position).
-
-/pcalc [-s, scan]: Scans region for an active portal (default height check is 20 blocks above and below player).
-NB: Override height check by using "/pcalc -s (height)". Height has to be less than or equal to 30.
-
-/pcalc [-h, help]: This will display help for the plugin, in case you forget the format. :D
-
-/pcalc -v: Shows current version number of PortalCalc
-
-
-Small License (please read LICENSE, too, if you aren't already familiar with the GPL)
-----------
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program. If not, see http://www.gnu.org/licenses/.
+1. For latest src dump, download the most recent "src<MM-DD-HH-MM> (Month, day, hour, minute respectively)".
+2. Fork repo.
+3. Email patricksanker@gmail.com to push your commits.
+4. Happy coding!
