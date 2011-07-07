@@ -37,7 +37,7 @@ public class PersistenceHandler {
 			server.find(Portal.class).findRowCount();
 		} catch (PersistenceException ex) {
 			//System.out.println("Installing database for " + plugin.getDescription().getName() + " due to first time usage");
-			plugin.initializeDatabase();
+			plugin.initializeDb();
 		}
 	}
 	
@@ -48,14 +48,18 @@ public class PersistenceHandler {
 	}
 	
 	public boolean isPortalAt(Location l){
-		return server.find(Portal.class).where()
+		return server.find(Portal.class).where().ieq("world", l.getWorld().getName())
 		.between("x", new Integer(l.getBlockX()-1), new Integer(l.getBlockX()+1))
 		.between("y", new Integer(l.getBlockY()-2), new Integer(l.getBlockY()+2))
 		.between("z",new Integer( l.getBlockZ()-1), new Integer(l.getBlockZ()+1)).findRowCount()!=0;
 	}
 	
+	public void removePortal(Portal p){
+		server.delete(p);
+	}
+	
 	public Portal getPortalAt(Location l){
-		return server.find(Portal.class).where()
+		return server.find(Portal.class).where().ieq("world", l.getWorld().getName())
 		.between("x", new Integer(l.getBlockX()-1), new Integer(l.getBlockX()+1))
 		.between("y", new Integer(l.getBlockY()-2), new Integer(l.getBlockY()+2))
 		.between("z",new Integer( l.getBlockZ()-1), new Integer(l.getBlockZ()+1)).findUnique();
@@ -63,14 +67,14 @@ public class PersistenceHandler {
 	}
 	
 	public Set<Portal> findPortalsNear(Location l){
-		return server.find(Portal.class).where()
+		return server.find(Portal.class).where().ieq("world", l.getWorld().getName())
 		.between("x", l.getBlockX()-127, l.getBlockX()+127)
 		.between("y", 1, 128)
 		.between("z", l.getBlockZ()-127, l.getBlockZ()+127).findSet();
 	}
 	
 	public Portal findPortalVeryNear(Location l){
-		return server.find(Portal.class).where()
+		return server.find(Portal.class).where().ieq("world", l.getWorld().getName())
 		.between("x", new Integer(l.getBlockX()-12), new Integer(l.getBlockX()+12))
 		.between("y", new Integer(max(1, l.getBlockY()-6)), new Integer(min(128, l.getBlockY()+6)))
 		.between("z", new Integer(l.getBlockZ()-12), new Integer(l.getBlockZ()+127)).findUnique();
@@ -83,7 +87,7 @@ public class PersistenceHandler {
 	public Portal recordPortalAt(Location l){
 		Portal p = new Portal();
 		p.setName("portal_"+portalCount());
-		//p.setWorld_name(l.getWorld().getName());
+		p.setWorld(l.getWorld().getName());
 		p.setX(l.getBlockX());
 		p.setY(l.getBlockY());
 		p.setZ(l.getBlockZ());

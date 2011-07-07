@@ -1,5 +1,7 @@
 package me.psanker.portalcalc.persist;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -11,14 +13,15 @@ import javax.persistence.Table;
 @Table(name = "pc_portal")
 public class Portal {
 	
-	@Id
+	String world;
 	String name;
+	
+	@Id
+	UUID id;
 	
 	Integer x;
 	Integer y;
 	Integer z;
-	
-	Integer uid;
 	
 	//String world_name;
 	
@@ -30,14 +33,6 @@ public class Portal {
 	public void setX(Integer x){this.x = x;}
 	
 	public Integer getX(){return x;}
-
-	public void setUid(Integer uid) {
-		this.uid = uid;
-	}
-
-	public Integer getUid() {
-		return uid;
-	}
 
 	public void setZ(Integer z) {
 		this.z = z;
@@ -71,4 +66,20 @@ public class Portal {
 		return world_name;
 	}
 */
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setWorld(String world) {
+		this.world = world;
+	}
+
+	public String getWorld() {
+		return world;
+	}
 }

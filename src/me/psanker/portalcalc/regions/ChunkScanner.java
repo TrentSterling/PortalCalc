@@ -15,7 +15,7 @@ public class ChunkScanner implements Runnable {
    	RegionProvider provider;
     private static final long SLEEP_TIME= 250;
     protected PCMain plugin;
-    protected boolean adviseLocation = true; // FORCE TRUE (this will be used in future update
+    protected boolean adviseLocation;
     
    // private volatile Thread scanThread;
     
