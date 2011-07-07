@@ -17,6 +17,9 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 public class PCMain extends JavaPlugin {
+	
+	public static final String VERSION = "1.2.0";
+	
 	protected PersistenceHandler handler;
 	
 	protected PCBlockListener blocklistener = new PCBlockListener();
