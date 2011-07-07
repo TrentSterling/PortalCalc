@@ -70,6 +70,7 @@ public class PCCommandManager implements CommandExecutor {
                 z = Math.floor(z / 8);
 
                 player.sendMessage(ChatColor.AQUA+"Nether position (X,Y,Z) is (" + x + ", " + y + ", " + z + ")");
+                return;
             }
 
             else if ("-o".equals(args[0]) && env == Environment.NETHER) {
@@ -83,6 +84,7 @@ public class PCCommandManager implements CommandExecutor {
                 z = Math.floor(z * 8);
 
                 player.sendMessage(ChatColor.AQUA+"Overworld position (X,Y,Z) is (" + x + ", " + y + ", " + z + ")");
+                return;
             }
 
             else if (("-n".equals(args[0]) && env == Environment.NETHER) || ("-o".equals(args[0]) && env == Environment.NORMAL)) {
@@ -92,17 +94,28 @@ public class PCCommandManager implements CommandExecutor {
                 double z = Math.floor(loc.getZ());
 
                 player.sendMessage(ChatColor.AQUA+"Current position (X,Y,Z) is (" + x + ", " + y + ", " + z + ")");
+                return;
             }
 
             else if (("help".equals(args[0])) || ("-h".equals(args[0]))) {
                 PCMessage.sendHelp(player);
-            }        
-
-            else {
-                PCMessage.message(player, "Incorrect format.", 1);
-                PCMessage.sendHelp(player);
-            }
+                return;
+            }   
         }
+        
+        else if((label.equals("pcalc")||label.equals("pc"))&&args.length==2){
+        	if(args[0].equals("db")){
+        		if(args[1].equals("flush")){
+        			plugin.handler.clearDb();
+        			PCMessage.message(player, "All portal entries removed.", 2);
+        			return;
+        		}
+        	}
+        	
+        }
+        
+        PCMessage.message(player, "Incorrect format.", 1);
+        PCMessage.sendHelp(player);
     }
     
     private void scan(CommandSender cs) {

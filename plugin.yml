@@ -1,6 +1,7 @@
 name: PortalCalc
 version: 1.1.1
 main: me.psanker.portalcalc.PCMain
+database: true
 
 commands:
   pcalc:

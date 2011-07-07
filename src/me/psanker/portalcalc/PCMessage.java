@@ -25,5 +25,6 @@ public class PCMessage {
         player.sendMessage(ChatColor.AQUA+"/pcalc -o : If in Nether, calculate Overworld position");
         player.sendMessage(ChatColor.AQUA+"/pcalc [-s, scan] : Scan region for active portals");
         player.sendMessage(ChatColor.AQUA+"/pcalc [-h, help] : Display PortalCalc help");
+        player.sendMessage(ChatColor.AQUA+"/pcalc db flush   : Clear portal database.");
     }
 }
