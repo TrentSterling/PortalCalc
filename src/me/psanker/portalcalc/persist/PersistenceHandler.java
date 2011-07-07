@@ -37,7 +37,7 @@ public class PersistenceHandler {
 			server.find(Portal.class).findRowCount();
 		} catch (PersistenceException ex) {
 			//System.out.println("Installing database for " + plugin.getDescription().getName() + " due to first time usage");
-			plugin.initializeDb();
+			plugin.initializeDatabase();
 		}
 	}
 	
@@ -84,13 +84,73 @@ public class PersistenceHandler {
 		return server.find(Portal.class).findRowCount();
 	}
 	
+	public boolean isPortal(Location l){
+		World w=l.getWorld();
+		int x,y,z;
+		x=l.getBlockX(); y=l.getBlockY(); z=l.getBlockZ();
+		if(l.getBlock().getTypeId()!=90)
+			return false;
+		if(!(	l.getWorld().getBlockAt(x+1, y, z).getTypeId()==90 ||
+				l.getWorld().getBlockAt(x-1, y, z).getTypeId()==90 ||
+				l.getWorld().getBlockAt(x, y, z+1).getTypeId()==90 ||
+				l.getWorld().getBlockAt(x, y, z-1).getTypeId()==90  ))
+			return false;
+		boolean up = l.getWorld().getBlockAt(z, y+1, z).getTypeId()==90;
+		boolean down = l.getWorld().getBlockAt(z, y+1, z).getTypeId()==90;
+		if(!up && !down)
+			return false;
+		return true;
+	}
+	
 	public Portal recordPortalAt(Location l){
+		boolean orientation;
+		int x,y,z;
+		x=l.getBlockX(); y=l.getBlockY(); z=l.getBlockZ();
+		
+		// Correct x/z and find orientation
+		if(l.getWorld().getBlockAt(x+1, y, z).getTypeId()==90){
+			orientation=false;
+			
+		}
+		else if(l.getWorld().getBlockAt(x-1, y, z).getTypeId()==90){
+			orientation=false;
+			x-=1;
+		}
+		else if(l.getWorld().getBlockAt(x, y, z+1).getTypeId()==90){
+			orientation=true;
+		}
+		else if(l.getWorld().getBlockAt(x, y, z-1).getTypeId()==90){
+			orientation=true;
+			z-=1;
+		}
+		else {
+			return new Portal();
+			//hacked portal block
+		}
+		
+		boolean up = l.getWorld().getBlockAt(z, y+1, z).getTypeId()==90;
+		boolean down = l.getWorld().getBlockAt(z, y+1, z).getTypeId()==90;
+		if(up && down){
+			y-=1;
+		}
+		else if(down && !up){
+			y-=2;
+		}
+		else if(!down && !up){
+			return new Portal();
+			//hacked portal block
+		}
+		else { } //block in correct position
+		
+		
+		//TODO check for nearby sign
+		
 		Portal p = new Portal();
 		p.setName("portal_"+portalCount());
 		p.setWorld(l.getWorld().getName());
-		p.setX(l.getBlockX());
-		p.setY(l.getBlockY());
-		p.setZ(l.getBlockZ());
+		p.setX(x);
+		p.setY(y);
+		p.setZ(z);
 		server.save(p);
 		return p;
 	}

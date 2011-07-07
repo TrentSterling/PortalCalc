@@ -76,7 +76,10 @@ public class PCMain extends JavaPlugin {
 		}
 		Portal portal;
 		if(!handler.isPortalAt(l))
-			 portal= handler.recordPortalAt(l);
+			if(handler.isPortal(l))
+				portal= handler.recordPortalAt(l);
+			else
+				return;
 		else
 			 portal = handler.getPortalAt(l);
 		

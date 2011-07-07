@@ -23,6 +23,8 @@ public class Portal {
 	Integer y;
 	Integer z;
 	
+	boolean orientation;
+	
 	//String world_name;
 	
 	public Portal(){

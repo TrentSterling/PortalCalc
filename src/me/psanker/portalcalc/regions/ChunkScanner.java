@@ -15,7 +15,7 @@ public class ChunkScanner implements Runnable {
    	RegionProvider provider;
     private static final long SLEEP_TIME= 250;
     protected PCMain plugin;
-    protected boolean adviseLocation;
+    protected boolean adviseLocation; // you know forcing it here won't do anything :D
     
    // private volatile Thread scanThread;
     
@@ -55,7 +55,7 @@ public class ChunkScanner implements Runnable {
         player = play;
         provider = p;
         this.plugin = plugin;
-        this.adviseLocation = adviseLocation;
+        this.adviseLocation = adviseLocation; // try down here xD
         
     }
 }
