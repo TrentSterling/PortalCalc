@@ -1,16 +1,21 @@
-PortalCalc -- by Patrick Anker
-Copyright (C) 2011 Patrick Anker
+PortalCalc -- by Patrick Anker & Joseph Griego
+Copyright (C) 2011 Patrick Anker, Joseph Griego
 
-Version number: 1.1.1
+Version number: 1.2.0
 Bukkit version: 953 (MC 1.7.2)
 
 Thank you for trying PortalCalc, a little plugin that aids in calculating and constructing dedicated portals for Minecraft. 
-What's in it? Currently (1.1.0), it tracks positions and calculates the identical position in the other world, overworld and nether.
+What's in it? Currently (1.2.0), it tracks positions and calculates the identical position in the other world, overworld and nether.
 It also can scan a region to see if an active portal exists. After the plugin scans the region AND finds a portal,
 it will tell you where the portal is and directions to get to it. 
 As per the GNU General Public License, you MAY modify ANY code in the plugin. 
 If you like something that you have built for this plugin, email it to me (patricksanker@gmail.com). 
 I will test it out and put it up for public download (of course, I will commend your splendid work :D ).
+
+Version: 1.2.0
+-----
+This version is a BUNCH of code cleanup, and a new scanning system courtesy of Joe (who will be an addition to the developer team).
+Portal registration is coming!
 
 USAGE
 -----
@@ -20,10 +25,12 @@ The plugin accepts the base command form "/pcalc" and its alias "/pc". Here are 
 
 /pcalc -o: If in Nether, this will calculate your position in respect to the Overworld. (NB: If you pass this argument to the plugin in the Overworld, it will return your current position).
 
-/pcalc -s: Scans region for an active portal (default height check is 20 blocks above and below player).
+/pcalc [-s, scan]: Scans region for an active portal (default height check is 20 blocks above and below player).
 NB: Override height check by using "/pcalc -s (height)". Height has to be less than or equal to 30.
 
 /pcalc [-h, help]: This will display help for the plugin, in case you forget the format. :D
+
+/pcalc -v: Shows current version number of PortalCalc
 
 
 Small License (please read LICENSE, too, if you aren't already familiar with the GPL)

@@ -2,7 +2,6 @@ package me.psanker.portalcalc.regions;
 
 //import me.psanker.portalcalc.PCLog;
 import me.psanker.portalcalc.PCMessage;
-import me.psanker.portalcalc.VectorHelper;
 
 import org.bukkit.Location;
 import me.psanker.portalcalc.PCMain;
@@ -16,7 +15,7 @@ public class ChunkScanner implements Runnable {
    	RegionProvider provider;
     private static final long SLEEP_TIME= 250;
     protected PCMain plugin;
-    protected boolean adviseLocation;
+    protected boolean adviseLocation = true; // FORCE TRUE (this will be used in future update
     
    // private volatile Thread scanThread;
     

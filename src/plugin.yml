@@ -1,0 +1,13 @@
+name: PortalCalc
+version: 1.2.0
+main: me.psanker.portalcalc.PCMain
+
+commands:
+    pcalc:
+        description: Main command
+        usage: |
+              /<command> [-n, -o, -s, scan, -h, help, -v]
+    pc:
+        description: Main command
+        usage: |
+              /<command> [-n, -o, -s, scan, -h, help, -v]
