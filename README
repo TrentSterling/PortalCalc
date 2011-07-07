@@ -1,7 +1,8 @@
 PORTALCALC DEVELOPMENT
 ----------------------
 
-1. For latest src dump, download the most recent "src<MM-DD-HH-MM>" (Month, day, hour, minute respectively).
-2. Fork repo.
-3. Email patricksanker@gmail.com to push your commits.
-4. Happy coding!
+1. Fork branch
+2. Make changes and commit 
+3. Make a Pull Request to our fork
+4. ???
+5. Profit!
