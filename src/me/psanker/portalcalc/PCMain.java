@@ -7,7 +7,7 @@ import me.psanker.portalcalc.regions.*;
 
 public class PCMain extends JavaPlugin {
 	
-	public static final String VERSION = "1.2.0";
+	public static final String VERSION = "1.2.1_dev";
     
     @Override
     public void onEnable() {
