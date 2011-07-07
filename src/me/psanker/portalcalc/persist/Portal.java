@@ -20,7 +20,7 @@ public class Portal {
 	
 	Integer uid;
 	
-	String worldName;
+	//String world_name;
 	
 	public Portal(){
 		
@@ -62,12 +62,13 @@ public class Portal {
 	public String getName() {
 		return name;
 	}
-
-	public void setWorldName(String worldName) {
-		this.worldName = worldName;
+/*
+	public void setWorld_name(String world_name) {
+		this.world_name = world_name;
 	}
 
-	public String getWorldName() {
-		return worldName;
+	public String getWorld_name() {
+		return world_name;
 	}
+*/
 }

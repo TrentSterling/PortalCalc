@@ -1,4 +1,4 @@
-package me.psanker.portalcalc.regions;
+package me.psanker.portalcalc;
 
 import org.bukkit.Location;
 
@@ -10,7 +10,7 @@ import org.bukkit.Location;
 
 public class VectorHelper {
     
-    public int calculateDistance(Location loc1, Location loc2) {
+    public static int calculateDistance(Location loc1, Location loc2) {
         double distance;
         double x1 = loc1.getX();
         double x2 = loc2.getX();
@@ -22,7 +22,7 @@ public class VectorHelper {
         return (int) Math.floor(distance);
     }
     
-    public java.lang.String getDirection(Location loc1, Location loc2) {
+    public static java.lang.String getDirection(Location loc1, Location loc2) {
         String direction = null;
         double x1 = loc1.getX();
         double x2 = loc2.getX();

@@ -2,7 +2,10 @@ package me.psanker.portalcalc.regions;
 
 //import me.psanker.portalcalc.PCLog;
 import me.psanker.portalcalc.PCMessage;
+import me.psanker.portalcalc.VectorHelper;
+
 import org.bukkit.Location;
+import me.psanker.portalcalc.PCMain;
 
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -12,11 +15,13 @@ public class ChunkScanner implements Runnable {
     Player player;
    	RegionProvider provider;
     private static final long SLEEP_TIME= 250;
+    protected PCMain plugin;
+    protected boolean adviseLocation;
     
    // private volatile Thread scanThread;
     
     //private static PCLog log = new PCLog();
-    private static VectorHelper vh = new VectorHelper();
+   
     
     public void run() {
     	
@@ -30,12 +35,7 @@ public class ChunkScanner implements Runnable {
     					Block b = world.getBlockAt(x, y, z);
     					int id = b.getTypeId();
     					if (id == 90) {
-                            PCMessage.message(player, "Active portal found", 2);
-                            Location loc1 = player.getLocation();
-                            Location loc2 = b.getLocation();
-                            int dis = vh.calculateDistance(loc1, loc2);
-                            String dir = vh.getDirection(loc1, loc2);
-                            PCMessage.message(player, "Portal is "+dis+" blocks "+dir, 1);
+    						plugin.handleFoundPortal(new Location(player.getWorld(), x,y,z), adviseLocation, player);
                             return;
                         }
     				}
@@ -52,8 +52,11 @@ public class ChunkScanner implements Runnable {
         
     }
 
-    public ChunkScanner(Player play, RegionProvider p) {
+    public ChunkScanner(Player play, RegionProvider p, PCMain plugin, boolean adviseLocation) {
         player = play;
         provider = p;
+        this.plugin = plugin;
+        this.adviseLocation = adviseLocation;
+        
     }
 }

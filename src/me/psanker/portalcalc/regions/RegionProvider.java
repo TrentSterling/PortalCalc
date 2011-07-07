@@ -10,13 +10,13 @@ public class RegionProvider implements Iterator<Region>, Iterable<Region> {
 	//Yay GIT.
 	
 	protected int index;
+	int radius;
 	protected LinkedList<Region> queue;
 	
-	public static final int SCAN_RADIUS=3;
 	
 	protected Region zero;
 
-	public RegionProvider(Player player) {
+	public RegionProvider(Player player, int radius) {
 		queue = new LinkedList<Region>();
 		index=0;
 		zero = new Region(player);
@@ -49,7 +49,7 @@ public class RegionProvider implements Iterator<Region>, Iterable<Region> {
 			return;
 		}
 		
-		if(index>=SCAN_RADIUS)
+		if(index>=radius)
 			return;
 		
 		for(int i=-index;i<=index;i++){

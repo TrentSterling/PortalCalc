@@ -1,6 +1,7 @@
 package me.psanker.portalcalc;
 
 import me.psanker.portalcalc.regions.ChunkScanner;
+import me.psanker.portalcalc.persist.Portal;
 import me.psanker.portalcalc.regions.RegionProvider;
 
 import org.bukkit.World.Environment;
@@ -13,6 +14,8 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.ChatColor;
 
+import java.util.Set;
+
 public class PCCommandManager implements CommandExecutor {
 
     @SuppressWarnings("unused")
@@ -24,7 +27,7 @@ public class PCCommandManager implements CommandExecutor {
     
     @Override
     public boolean onCommand(CommandSender cs, Command cmnd, String label, String[] args) {
-        
+    	Player player = (Player) cs;
         if (cs instanceof ConsoleCommandSender) {
             PCLog.log("Player entity expected", 0);
             return false;
@@ -33,12 +36,22 @@ public class PCCommandManager implements CommandExecutor {
                     || ("pc".equals(label)) && (args.length == 1) && ("-s".equals(args[0]))
                     || ("pcalc".equals(label)) && (args.length == 1) && ("scan".equals(args[0]))
                     || ("pc".equals(label)) && (args.length == 1) && ("scan".equals(args[0]))) {
-                this.scan(cs);
+            	
+            	Set<Portal> s = plugin.handler.findPortalsNear(player.getLocation());
+            	if(s.isEmpty())
+            		plugin.searchForPortal(3, (Player) cs, true);
+            	else
+            		for(Portal p : s){
+            			Location loc1 = player.getLocation();
+            			Location loc2 = new Location(player.getWorld(), p.getX(), p.getY(), p.getZ());
+            			int dis = VectorHelper.calculateDistance(loc1, loc2);
+                        String dir = VectorHelper.getDirection(loc1, loc2);
+                        PCMessage.message(player, "Active portal "+dis+" blocks "+dir, 1);
+            		}
                 return true;
             }
             
             else if ((("pcalc".equals(label)) && (args.length == 0)) || (("pc".equals(label)) && args.length == 0)) {
-            	Player player = (Player) cs;
             	PCMessage.sendHelp(player);
             	return true;
             }
@@ -96,6 +109,20 @@ public class PCCommandManager implements CommandExecutor {
                 player.sendMessage(ChatColor.AQUA+"Current position (X,Y,Z) is (" + x + ", " + y + ", " + z + ")");
                 return;
             }
+            
+            else if(args[0].equals("select")){
+        		Portal p = plugin.handler.findPortalVeryNear(player.getLocation());
+        		if(p == null){
+        			PCMessage.message(player, "No portal known nearby, searching now", 0);
+        			plugin.searchForPortal(1, player, false);
+        			
+        			
+        			return;
+        		}
+        		plugin.setSelectedPortal(p);
+        		PCMessage.message(player, "Portal \""+p.getName()+"\" selected.", 0);
+        		return;
+        	}
 
             else if (("help".equals(args[0])) || ("-h".equals(args[0]))) {
                 PCMessage.sendHelp(player);
@@ -118,18 +145,4 @@ public class PCCommandManager implements CommandExecutor {
         PCMessage.sendHelp(player);
     }
     
-    private void scan(CommandSender cs) {
-        Player player = (Player) cs;
-    //    boolean scanned = scan.scan(player); <-- this method always returns true, so what's the point of testing the return value?!
-        RegionProvider p = new RegionProvider(player);
-        ChunkScanner s = new ChunkScanner(player, p);
-        Thread scanThread = new Thread(s);
-        scanThread.start();
-        
-       /* if (scanned == true) {
-            // Cool.
-        } else {
-            log.log("scan() called for no reason", 2);
-        }*/
-    }
 }

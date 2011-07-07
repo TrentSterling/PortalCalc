@@ -15,6 +15,11 @@ import org.bukkit.plugin.*;
 import org.bukkit.Location;
 import org.bukkit.World;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
+
+
 public class PersistenceHandler {
 	
 	EbeanServer server;
@@ -42,33 +47,48 @@ public class PersistenceHandler {
 		PCLog.log("All portal entries deleted.", 0);
 	}
 	
+	public boolean isPortalAt(Location l){
+		return server.find(Portal.class).where()
+		.between("x", new Integer(l.getBlockX()-1), new Integer(l.getBlockX()+1))
+		.between("y", new Integer(l.getBlockY()-2), new Integer(l.getBlockY()+2))
+		.between("z",new Integer( l.getBlockZ()-1), new Integer(l.getBlockZ()+1)).findRowCount()!=0;
+	}
+	
 	public Portal getPortalAt(Location l){
-		return server.find(Portal.class).where().ieq("worldName", l.getWorld().getName())
-		.between("x", l.getBlockX()-1, l.getBlockX()+1)
-		.between("y", l.getBlockY()-2, l.getBlockY()+2)
-		.between("z", l.getBlockZ()-1, l.getBlockZ()+1).findUnique();
+		return server.find(Portal.class).where()
+		.between("x", new Integer(l.getBlockX()-1), new Integer(l.getBlockX()+1))
+		.between("y", new Integer(l.getBlockY()-2), new Integer(l.getBlockY()+2))
+		.between("z",new Integer( l.getBlockZ()-1), new Integer(l.getBlockZ()+1)).findUnique();
 		
 	}
 	
 	public Set<Portal> findPortalsNear(Location l){
-		return server.find(Portal.class).where().ieq("worldName", l.getWorld().getName())
+		return server.find(Portal.class).where()
 		.between("x", l.getBlockX()-127, l.getBlockX()+127)
 		.between("y", 1, 128)
 		.between("z", l.getBlockZ()-127, l.getBlockZ()+127).findSet();
+	}
+	
+	public Portal findPortalVeryNear(Location l){
+		return server.find(Portal.class).where()
+		.between("x", new Integer(l.getBlockX()-12), new Integer(l.getBlockX()+12))
+		.between("y", new Integer(max(1, l.getBlockY()-6)), new Integer(min(128, l.getBlockY()+6)))
+		.between("z", new Integer(l.getBlockZ()-12), new Integer(l.getBlockZ()+127)).findUnique();
 	}
 	
 	public int portalCount(){
 		return server.find(Portal.class).findRowCount();
 	}
 	
-	public void recordPortalAt(Location l){
+	public Portal recordPortalAt(Location l){
 		Portal p = new Portal();
 		p.setName("portal_"+portalCount());
-		p.setWorldName(l.getWorld().getName());
+		//p.setWorld_name(l.getWorld().getName());
 		p.setX(l.getBlockX());
 		p.setY(l.getBlockY());
 		p.setZ(l.getBlockZ());
 		server.save(p);
+		return p;
 	}
 	
 	
