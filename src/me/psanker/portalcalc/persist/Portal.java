@@ -7,7 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
 
-
+import org.bukkit.Location;
+import org.bukkit.World;
 
 @Entity
 @Table(name = "pc_portal")
@@ -84,4 +85,20 @@ public class Portal {
 	public String getWorld() {
 		return world;
 	}
+	
+	public boolean isBlockAdjacent(Location l){
+		int x,y,z;
+		x=l.getBlockX(); y=l.getBlockY(); z=l.getBlockZ();
+		if(orientation){
+			return 	z<=this.z.intValue()+2 && z>=this.z.intValue()-1 &&
+					x>=this.x.intValue()+1 && x>=this.x.intValue()-1 &&
+					y<=this.y.intValue()+3 && y>=this.y.intValue()-1;
+		}
+		else{
+			return 	x<=this.x.intValue()+2 && x>=this.x.intValue()-1 &&
+					z>=this.z.intValue()+1 && z>=this.z.intValue()-1 &&
+					y<=this.y.intValue()+3 && y>=this.y.intValue()-1;
+		}
+	}
+	
 }

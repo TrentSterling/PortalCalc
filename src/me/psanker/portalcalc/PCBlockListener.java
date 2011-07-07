@@ -22,6 +22,12 @@ public class PCBlockListener extends BlockListener {
 	
 	public void onSignChange(SignChangeEvent e){
 		Location l=e.getBlock().getLocation();
+		PCLog.log("Sign mutated", 0);
+		Portal p = plugin.handler.findPortalVeryNear(l);
+		if(p==null)
+			return;
+		if(p.isBlockAdjacent(l))
+			PCLog.log("WOOOO", 0);
 		
 	}
 	

@@ -1,5 +1,9 @@
 package me.psanker.portalcalc;
 
+import java.util.Set;
+
+import me.psanker.portalcalc.persist.Portal;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -46,6 +50,9 @@ public class PCCommandManager implements CommandExecutor {
             }
             else if(args[0].equals("-v")){
             	version(player);
+            }
+            else if(args[0].equals("-l")){
+            	list(player);
             }
             else{
             	help(player);
@@ -94,6 +101,13 @@ public class PCCommandManager implements CommandExecutor {
     
     protected void help(Player player){
     	PCMessage.sendHelp(player);
+    }
+    
+    protected void list(Player player){
+    	Set<Portal> s = plugin.handler.allPortals();
+    	for(Portal p : s){
+    		PCMessage.message(player, "portal name "+p.getName()+" in "+p.getWorld(), 1);
+    	}
     }
     
 }

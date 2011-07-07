@@ -75,11 +75,14 @@ public class PCMain extends JavaPlugin {
             PCMessage.message(p, "Portal is "+dis+" blocks "+dir, 1);
 		}
 		Portal portal;
-		if(!handler.isPortalAt(l))
+		if(!handler.isPortalAt(l)){
 			if(handler.isPortal(l))
 				portal= handler.recordPortalAt(l);
-			else
+		
+			else{
 				return;
+			}
+		}
 		else
 			 portal = handler.getPortalAt(l);
 		
