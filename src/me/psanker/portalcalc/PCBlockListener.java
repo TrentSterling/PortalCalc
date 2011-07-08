@@ -50,6 +50,19 @@ public class PCBlockListener extends BlockListener {
 			
 		
 	}
+	
+	public void onBlockDamage(BlockDamageEvent e) {
+		Location loc = e.getBlock().getLocation();
+		Portal p = plugin.handler.findPortalVeryNear(loc);
+		
+		if (p == null)
+			return;
+		
+		if ((e.getBlock().getTypeId() == 49) && (p.isBlockAdjacent(loc)) && (!plugin.permissionHandler.has(e.getPlayer(), "portalcalc.admin"))) {
+			e.setCancelled(true);
+			PCLog.log("Player "+e.getPlayer().getDisplayName()+ " tried to deactivate portal", 1); // Perhaps grab portal id/name
+		}
+	}
 
 
 }

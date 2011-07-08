@@ -16,9 +16,16 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+import com.nijiko.permissions.PermissionHandler;
+import com.nijikokun.bukkit.Permissions.Permissions;
+import org.bukkit.plugin.Plugin;
+
 public class PCMain extends JavaPlugin {
 	
-	public static final String VERSION = "1.2.0";
+	public static PermissionHandler permissionHandler;
+	
+	public static final String VERSION = "1.3.0a";
+	
 	
 	protected PersistenceHandler handler;
 	
@@ -31,6 +38,9 @@ public class PCMain extends JavaPlugin {
         getCommand("pcalc").setExecutor(new PCCommandManager(this));
         getCommand("pc").setExecutor(new PCCommandManager(this));
         
+        // Set up permissions
+        setupPermissions();
+        
         PluginManager pm = this.getServer().getPluginManager();
         pm.registerEvent(Event.Type.SIGN_CHANGE, blocklistener, Priority.Normal, this);
         pm.registerEvent(Event.Type.PORTAL_CREATE, worldlistener, Priority.Normal, this);
@@ -42,6 +52,22 @@ public class PCMain extends JavaPlugin {
     @Override
     public void onDisable() {
         this.getServer().getScheduler().cancelTasks(this);
+    }
+    
+    private void setupPermissions() {
+        if (permissionHandler != null) {
+            return;
+        }
+        
+        Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
+        
+        if (permissionsPlugin == null) {
+            PCLog.log("Permission system not detected, defaulting to OP",1);
+            return;
+        }
+        
+        permissionHandler = ((Permissions) permissionsPlugin).getHandler();
+        PCLog.log("Found and will use plugin "+((Permissions)permissionsPlugin).getDescription().getFullName(),0);
     }
     
     public void initializeDatabase(){
