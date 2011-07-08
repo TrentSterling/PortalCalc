@@ -89,8 +89,6 @@ public class Portal {
 	}
 	
 	public boolean isBlockAdjacent(Location l){
-		PCLog.log("!!!-"+getOrientation().booleanValue(), 0);
-		
 		int x,y,z;
 		x=l.getBlockX(); y=l.getBlockY(); z=l.getBlockZ();
 		if(getOrientation().booleanValue()){

@@ -26,15 +26,12 @@ public class PCBlockListener extends BlockListener {
 	
 	public void onSignChange(SignChangeEvent e){
 		Location l=e.getBlock().getLocation();
-		PCLog.log("Sign mutated", 0);
 		Portal p = plugin.handler.findPortalVeryNear(l);
 		if(p==null)
 			return;
-		PCLog.log("Sign near portal :D", 0);
 		if(p.isBlockAdjacent(l)){
 			p.setName(e.getLine(0));
 			plugin.handler.savePortal(p);
-			
 		}
 		
 	}
@@ -47,7 +44,6 @@ public class PCBlockListener extends BlockListener {
 		if(e.getBlock().getTypeId()==90&&e.getChangedTypeId()==90)
 			if(plugin.handler.isPortalAt(e.getBlock().getLocation())){
 				Portal p= plugin.handler.getPortalAt(e.getBlock().getLocation());
-				PCLog.log("Portal removed from db: "+p.getName(), 0);
 				plugin.handler.removePortal(p);
 				
 			}

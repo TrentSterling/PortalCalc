@@ -129,7 +129,6 @@ public class PersistenceHandler {
 				z-=1;
 			}
 			else {
-				PCLog.log("1!", 1);
 				return new Portal();
 
 				//hacked portal block
@@ -144,7 +143,6 @@ public class PersistenceHandler {
 				y-=2;
 			}
 			else if(!down && !up){
-				PCLog.log("2!", 1);
 				return new Portal();
 
 				//hacked portal block
