@@ -23,7 +23,7 @@ public class PCMain extends JavaPlugin {
 	protected PersistenceHandler handler;
 	
 	protected PCBlockListener blocklistener = new PCBlockListener(this);
-	protected PCWorldListener worldlistener = new PCWorldListener(this, blocklistener);
+	protected PCWorldListener worldlistener = new PCWorldListener(this);
     
     @Override
     public void onEnable() {
@@ -35,7 +35,6 @@ public class PCMain extends JavaPlugin {
         pm.registerEvent(Event.Type.SIGN_CHANGE, blocklistener, Priority.Normal, this);
         pm.registerEvent(Event.Type.PORTAL_CREATE, worldlistener, Priority.Normal, this);
         pm.registerEvent(Event.Type.BLOCK_PHYSICS, blocklistener, Priority.Normal, this);
-    //    pm.registerEvent(Event.Type.BLOCK_FORM, blocklistener, Priority.Normal, this);
         
         handler=new PersistenceHandler(this);
     }

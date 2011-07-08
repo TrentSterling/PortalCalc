@@ -11,11 +11,9 @@ import org.bukkit.block.BlockFace;
 
 public class PCWorldListener extends WorldListener {
 	protected PCMain plugin;
-	protected PCBlockListener blocks;
 	
-	public PCWorldListener(PCMain plugin, PCBlockListener blocks){
+	public PCWorldListener(PCMain plugin){
 		this.plugin = plugin;
-		this.blocks = blocks;
 	}
 	
 	public void onPortalCreate(PortalCreateEvent e){
