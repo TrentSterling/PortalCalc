@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
 
+import me.psanker.portalcalc.PCLog;
+
 import org.bukkit.Location;
 import org.bukkit.World;
 
@@ -87,6 +89,8 @@ public class Portal {
 	}
 	
 	public boolean isBlockAdjacent(Location l){
+		PCLog.log("!!!-"+getOrientation().booleanValue(), 0);
+		
 		int x,y,z;
 		x=l.getBlockX(); y=l.getBlockY(); z=l.getBlockZ();
 		if(getOrientation().booleanValue()){

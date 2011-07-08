@@ -31,8 +31,11 @@ public class PCBlockListener extends BlockListener {
 		if(p==null)
 			return;
 		PCLog.log("Sign near portal :D", 0);
-		if(p.isBlockAdjacent(l))
-			PCLog.log("WOOOO", 0);
+		if(p.isBlockAdjacent(l)){
+			p.setName(e.getLine(0));
+			plugin.handler.savePortal(p);
+			
+		}
 		
 	}
 	

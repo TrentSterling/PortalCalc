@@ -175,6 +175,10 @@ public class PersistenceHandler {
 	public Set<Portal> allPortals(){
 		return server.find(Portal.class).findSet();
 	}
+	
+	public void savePortal(Portal p){
+		
+	}
 
 
 }
