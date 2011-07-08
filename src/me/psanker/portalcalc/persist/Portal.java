@@ -24,7 +24,7 @@ public class Portal {
 	Integer y;
 	Integer z;
 	
-	boolean orientation;
+	Boolean orientation;
 	
 	//String world_name;
 	
@@ -89,16 +89,26 @@ public class Portal {
 	public boolean isBlockAdjacent(Location l){
 		int x,y,z;
 		x=l.getBlockX(); y=l.getBlockY(); z=l.getBlockZ();
-		if(orientation){
+		if(getOrientation().booleanValue()){
 			return 	z<=this.z.intValue()+2 && z>=this.z.intValue()-1 &&
-					x>=this.x.intValue()+1 && x>=this.x.intValue()-1 &&
+					x<=this.x.intValue()+1 && x>=this.x.intValue()-1 &&
 					y<=this.y.intValue()+3 && y>=this.y.intValue()-1;
 		}
 		else{
 			return 	x<=this.x.intValue()+2 && x>=this.x.intValue()-1 &&
-					z>=this.z.intValue()+1 && z>=this.z.intValue()-1 &&
+					z<=this.z.intValue()+1 && z>=this.z.intValue()-1 &&
 					y<=this.y.intValue()+3 && y>=this.y.intValue()-1;
 		}
 	}
+
+	public void setOrientation(Boolean orientation) {
+		this.orientation = orientation;
+	}
+
+	public Boolean getOrientation() {
+		return orientation;
+	}
+
+
 	
 }
