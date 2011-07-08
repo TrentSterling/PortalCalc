@@ -75,9 +75,9 @@ public class PersistenceHandler {
 
 	public Portal findPortalVeryNear(Location l){
 		return server.find(Portal.class).where().ieq("world", l.getWorld().getName())
-		.between("x", new Integer(l.getBlockX()-12), new Integer(l.getBlockX()+12))
+		.between("x", new Integer(l.getBlockX()-5), new Integer(l.getBlockX()+5))
 		.between("y", new Integer(max(1, l.getBlockY()-6)), new Integer(min(128, l.getBlockY()+6)))
-		.between("z", new Integer(l.getBlockZ()-12), new Integer(l.getBlockZ()+127)).findUnique();
+		.between("z", new Integer(l.getBlockZ()-5), new Integer(l.getBlockZ()+5)).findUnique();
 	}
 
 	public int portalCount(){
