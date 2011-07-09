@@ -33,5 +33,5 @@ NB: Override height check by using "/pcalc -s (height)". Height has to be less t
 
 A Little Disclaimer
 ----
-This software is licensed under the use of the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) License.
-Please go over the LICENSE file or visit http://creativecommons.org/licenses/by-nc-sa/3.0/ for more information.
+This software is licensed under the Gnu General Public License.
+Please go over the LICENSE file.
