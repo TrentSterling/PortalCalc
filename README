@@ -7,8 +7,7 @@ Bukkit version: 953 (MC 1.7.2)
 Thank you for trying PortalCalc, a little plugin that aids in calculating and constructing dedicated portals for Minecraft. 
 What's in it? Currently (1.2.0), it tracks positions and calculates the identical position in the other world, overworld and nether.
 It also can scan a region to see if an active portal exists. After the plugin scans the region AND finds a portal,
-it will tell you where the portal is and directions to get to it. 
-As per the GNU General Public License, you MAY modify ANY code in the plugin. 
+it will tell you where the portal is and directions to get to it.
 If you like something that you have built for this plugin, email it to me (patricksanker@gmail.com). 
 I will test it out and put it up for public download (of course, I will commend your splendid work :D ).
 
@@ -34,5 +33,5 @@ NB: Override height check by using "/pcalc -s (height)". Height has to be less t
 
 A Little Disclaimer
 ----
-This software is signed under the use of the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) License.
+This software is licensed under the use of the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) License.
 Please go over the LICENSE file or visit http://creativecommons.org/licenses/by-nc-sa/3.0/ for more information.
